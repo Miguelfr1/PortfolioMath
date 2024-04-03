@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portfolio de Petites Œuvres</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Libre+Caslon+Display&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Sn6XsD4L8z4ZtUt5eqFh7OBNo5rIjRHDyHqAWs9JGmq8I3Pl9ujGMBYXfhGzF9VX8K6yD6QD5PXs1H8QlEOZwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+      integrity="sha512-Sn6XsD4L8z4ZtUt5eqFh7OBNo5rIjRHDyHqAWs9JGmq8I3Pl9ujGMBYXfhGzF9VX8K6yD6QD5PXs1H8QlEOZwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Indie Flower", cursive;
+        background-color: #ffffff;
+        overflow-x: hidden;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: #ffffff;
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        transition: top 0.3s;
+      }
+
+      .title {
+        margin: 0;
+        font-size: 2.5rem;
+        color: #000000;
+      }
+
+      nav ul {
+        list-style-type: none;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      nav ul li {
+        margin: 0px 40px 0 10px;
+      }
+
+      nav ul li a {
+        text-decoration: none;
+        color: #000000;
+        transition: color 0.3s;
+        font-size: 1.2rem;
+        font-family: "Libre Caslon Display", serif;
+      }
+
+      nav ul li a:hover {
+        color: #888888;
+      }
+
+      .menu-toggle {
+        display: none;
+        position: absolute;
+        top: 30px;
+        right: 50px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 999;
+      }
+
+      .menu-toggle span {
+        display: block;
+        width: 30px;
+        height: 3px;
+        background-color: #000;
+        margin-bottom: 5px;
+        transition: transform 0.3s ease;
+      }
+
+      .menu-toggle.open span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+      }
+
+      .menu-toggle.open span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-toggle.open span:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+      }
+
+      .section {
+        padding: 50px;
+        background-color: #ffffff;
+        margin-top: -1px;
+        text-align: center;
+      }
+
+      .section-title {
+        font-size: 3rem;
+        color: #000000;
+        text-shadow: 2px 2px 5px rgb(255, 255, 255);
+        margin-bottom: 20px;
+      }
+
+      .photo-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        flex-wrap: wrap;
+      }
+
+      .photo {
+        max-width: 20%;
+        margin: 10px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+      }
+
+      /* Styles spécifiques pour les appareils mobiles */
+      @media screen and (max-width: 767px) {
+        .section-title {
+          font-size: 2rem;
+        }
+
+        .photo {
+          max-width: 50%;
+          margin: 0px;
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+          margin-top: 50px;
+        }
+      }
+
+      @media screen and (max-width: 768px) {
+        .menu-toggle {
+          display: block;
+        }
+
+        nav ul {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          position: fixed;
+          top: -100%;
+          right: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #ffffff;
+          transition: top 0.6s ease;
+          z-index: 998;
+        }
+
+        nav ul.open {
+          top: 0;
+        }
+
+        nav ul li {
+          margin-top: 20px;
+        }
+      }
+
+      #portfolio {
+        background-color: #ffffff;
+        margin-top: -1px;
+        text-align: center;
+        position: relative;
+      }
+
+      .portfolio-item {
+        position: relative;
+      }
+
+      .portfolio-content {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: white;
+        font-weight: bold; /* Augmente l'épaisseur du texte */
+      }
+
+      .portfolio-button {
+        display: inline-block;
+        padding: 15px 30px;
+        background-color: #bca371;
+        color: #ff8325;
+        text-decoration: none;
+        border: 2px solid #ff8325;
+        border-radius: 50px;
+        font-family: "Libre Caslon Display", serif; /* Utilisation de la même police que la barre de navigation */
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      .portfolio-button:hover {
+        background-color: #fff;
+        color: #000;
+      }
+
+      .portfolio-image {
+        width: 30%;
+      }
+
+      @media screen and (max-width: 768px) {
+        .portfolio-image {
+          width: 100%;
+        }
+      }
+
+      
+      #reseaux{
+        background-color: #ffffff;
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        margin-top: 20px;
+      }
+
+      .page-footer {
+        background-color: #ffffff; /* Couleur de fond du footer */
+        color: #000000; /* Couleur du texte du footer */
+      }
+
+      .social-link {
+        color: #000000;
+        font-size: 24px;
+      }
+
+      .social-link:hover {
+        color: #21339c; /* Couleur au survol */
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1 class="title">Petites Œuvres</h1>
+      <button class="menu-toggle d-lg-none" aria-label="Menu Toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="d-none d-lg-block">
+        <ul>
+          <li>
+            <a href="#accueil" class="active">Accueil</a>
+          </li>
+          <li>
+            <a href="#presentation">Présentation</a>
+          </li>
+          <li>
+            <a href="#portfolio">Portfolio</a>
+          </li>
+          <li>
+            <a href="#materiel">Matériel</a>
+          </li>
+          <li>
+            <a href="#reseaux">Réseaux</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+    <main class="container">
+      <section id="accueil" class="section">
+        <div class="photo-container">
+          <img src="./img/VinMath.jpg" alt="Photo 2" class="photo" />
+          <img src="./img/TableauChaise.jpg" alt="Photo 3" class="photo" />
+        </div>
+        <h2 class="section-title">Petites Œuvres</h2>
+        <p>by Mathilde Francis</p>
+        <div class="photo-container" style="margin-top: -100px">
+          <img
+            src="./img/PeintureBleu.jpg"
+            alt="Photo 1"
+            class="photo"
+            style="transform: rotate(-90deg)"
+          />
+        </div>
+      </section>
+
+      <section id="presentation" class="section bg-light py-5">
+        <h2>Présentation</h2>
+        <p>...</p>
+      </section>
+
+      <section id="portfolio" class="section bg-primary text-white py-5">
+        <div class="portfolio-item">
+          <img src="./img/Tableau.jpg" alt="Tableau" class="portfolio-image" />
+          <div class="portfolio-content">
+            <a href="Portfolio.html" class="portfolio-button">Voir mes œuvres</a>
+            </a
+            >
+          </div>
+        </div>
+      </section>
+
+      <section id="materiel" class="section bg-warning py-5">
+        <h2>Matériel</h2>
+        <p>...</p>
+      </section>
+
+      <section id="reseaux" class="page-footer">
+        <div class="container">
+          <div class="row justify-content-center">
+            <div class="col-lg-4 col-md-4 col-sm-12 text-center">
+              
+              <span class="mx-2"></span>
+              <p>Contactez-moi pour plus d'informations.</p>
+  
+              <a
+                href="https://www.instagram.com/petitesoeuvres"
+                
+                class="social-link"
+                ><i class="fab fa-instagram"></i
+              ></a>
+              <span class="mx-2"></span>
+              <a href="mailto:mathildefcis@gmail.com" class="social-link"
+                ><i class="far fa-envelope"></i
+              ></a>
+            </div>
+  
+            <div class="row mt-5">
+              <div class="col-md-12 text-center">
+                <p>&copy; 2024 Petites Œuvres. Tous droits réservés.</p>
+              </div>
+          </div>
+        </div>
+      </section>
+    </main>
+    
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-BKj7f5zgi5RaxoKmsP1D6DZ8ss3fuJj9PQT7wpUpIk8rGSmPVKZQdSHtJ/nlNhXh"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      const menuToggle = document.querySelector(".menu-toggle");
+      const nav = document.querySelector("nav ul");
+
+      menuToggle.addEventListener("click", () => {
+        nav.classList.toggle("open");
+        menuToggle.classList.toggle("open");
+      });
+    </script>
+  </body>
+</html>
+
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+/>
+
+<style></style>
